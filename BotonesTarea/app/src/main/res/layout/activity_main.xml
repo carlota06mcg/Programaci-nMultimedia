@@ -11,7 +11,7 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="@string/continuar"
         tools:layout_editor_absoluteX="97dp"
         tools:layout_editor_absoluteY="324dp" />
 
@@ -19,7 +19,7 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="@string/cancelar"
         tools:layout_editor_absoluteX="230dp"
         tools:layout_editor_absoluteY="324dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
