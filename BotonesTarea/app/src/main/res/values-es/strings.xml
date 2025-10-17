@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Botones</string>
+    <string name="continuar">Continuar</string>
+    <string name="cancelar">Cancelar</string>
+</resources>
