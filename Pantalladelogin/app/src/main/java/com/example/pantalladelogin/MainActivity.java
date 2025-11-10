@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -19,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private Button bContinuar;
     private Switch sRecordar;
     private TextView tvMensaje;
-
 
 
     @Override
@@ -39,20 +39,26 @@ public class MainActivity extends AppCompatActivity {
         sRecordar = findViewById(R.id.sRecordar);
         tvMensaje = findViewById(R.id.tvMensaje);
 
-
         bContinuar.setOnClickListener(v -> {
             String correo = tCorreo.getText().toString();
             String contraseña = tContraseña.getText().toString();
 
-            if(correo.equals("taylorswift@correo.com") && contraseña.equals("123")){
-                tvMensaje.setText("Usuario y contraseña correctos");
-            }
-            else{
+            Boolean recordar = sRecordar.isChecked();
+
+
+            if (correo.equals("TAYLORSWIFT@correo.com") && contraseña.equals("123")) {
+                tvMensaje.setText("Usuario y contraseña correctos \n Almacenados para siguientes accesos");
+                tvMensaje.setTextColor(ContextCompat.getColor(this, R.color.green));
+            } else {
                 tvMensaje.setText("Usuario/Contraseña incorrectos");
+                tvMensaje.setTextColor(ContextCompat.getColor(this, R.color.red));
 
             }
+            if (recordar && correo.equals("TAYLORSWIFT@correo.com") && contraseña.equals("123")) {
+                tvMensaje.append("\nRecordar");
+            }
+
+
         });
     }
 }
-
-
