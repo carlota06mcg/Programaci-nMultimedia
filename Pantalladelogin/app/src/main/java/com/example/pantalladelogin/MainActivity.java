@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvMensaje;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +44,12 @@ public class MainActivity extends AppCompatActivity {
             String correo = tCorreo.getText().toString();
             String contraseña = tContraseña.getText().toString();
 
-            if (correo.equals("taylorswift@correo.com") && contraseña.equals("123")) {
-                if (sRecordar.isChecked()) {
-                    tvMensaje.setText("Usuario y contraseña correctos");
-                } else {
-                    tvMensaje.setText("Usuario y contraseña incorrectos");
-                }
+            if(correo.equals("taylorswift@correo.com") && contraseña.equals("123")){
+                tvMensaje.setText("Usuario y contraseña correctos");
+            }
+            else{
+                tvMensaje.setText("Usuario/Contraseña incorrectos");
+
             }
         });
     }
