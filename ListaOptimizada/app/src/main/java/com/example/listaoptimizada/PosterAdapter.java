@@ -38,7 +38,7 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterAdapter.PostersVie
                     context.getResources()
                             .getIdentifier(posters.getImage(),
                                     "drawable",
-                                    "com.example.ListaOptimizada"));
+                                    "com.example.listaoptimizada"));
         }
     }
 
