@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 public class PosterAdapter extends RecyclerView.Adapter<PosterAdapter.PostersViewHolder>
 {
 
-    private Posters[] listaPeliculas;
+    private Posters[] listaPosters;
 
-    public PosterAdapter(Posters[] listaPeliculas)
+    public PosterAdapter(Posters[] listaPosters)
     {
-        this.listaPeliculas = listaPeliculas;
+        this.listaPosters = listaPosters;
     }
 
     public static class PostersViewHolder extends RecyclerView.ViewHolder {
