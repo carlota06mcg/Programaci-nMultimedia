@@ -1,6 +1,8 @@
 package com.example.appmusica;
 
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,10 +21,13 @@ public class MainActivity extends AppCompatActivity {
     private MediaPlayer mediaPlayer;
     private SeekBar seekBar;
     private TextView tReproduccion, tTotal, tituloCancion;
-    private Button bPlay, bPausa;
+    private Button bPlay, bPausa, bcancion1, bcancion2, bcancion3, bcancion4;
     private ImageView imageView;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private Runnable updateSeekBar;
+
+    private SoundPool soundPool;
+    private int sonido1, sonido2, sonido3, sonido4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
         tTotal = findViewById(R.id.tTotal);
         tituloCancion = findViewById(R.id.tituloCancion);
         imageView = findViewById(R.id.imageView);
+        bcancion1 = findViewById(R.id.bcancion1);
+        bcancion2 = findViewById(R.id.bcancion2);
+        bcancion3 = findViewById(R.id.bcancion3);
+        bcancion4 = findViewById(R.id.bcancion4);
 
         int duracionTotal = mediaPlayer.getDuration();
         seekBar.setMax(duracionTotal);
@@ -71,11 +80,9 @@ public class MainActivity extends AppCompatActivity {
                     tReproduccion.setText(formatearTiempo(progress));
                 }
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
@@ -84,6 +91,37 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer.setOnCompletionListener(mp -> {
             seekBar.setProgress(0);
             tReproduccion.setText("00:00");
+        });
+
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(4)
+                .setAudioAttributes(audioAttributes)
+                .build();
+
+        sonido1 = soundPool.load(this, R.raw.sonido1, 1);
+        sonido2 = soundPool.load(this, R.raw.sonido2, 1);
+        sonido3 = soundPool.load(this, R.raw.sonido3, 1);
+        sonido4 = soundPool.load(this, R.raw.sonido4, 1);
+
+        bcancion1.setOnClickListener(v -> {
+            soundPool.play(sonido1, 1.0f, 1.0f, 1, 0, 1.0f);
+        });
+
+        bcancion2.setOnClickListener(v -> {
+            soundPool.play(sonido2, 1.0f, 1.0f, 1, 0, 1.0f);
+        });
+
+        bcancion3.setOnClickListener(v -> {
+            soundPool.play(sonido3, 1.0f, 1.0f, 1, 0, 1.0f);
+        });
+
+        bcancion4.setOnClickListener(v -> {
+            soundPool.play(sonido4, 1.0f, 1.0f, 1, 0, 1.0f);
         });
     }
 
@@ -95,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                     int posicionActual = mediaPlayer.getCurrentPosition();
                     seekBar.setProgress(posicionActual);
                     tReproduccion.setText(formatearTiempo(posicionActual));
-                    handler.postDelayed(this, 100); // Actualizar cada 100ms
+                    handler.postDelayed(this, 100);
                 }
             }
         };
@@ -111,11 +149,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Liberar recursos
         if (mediaPlayer != null) {
             mediaPlayer.release();
             mediaPlayer = null;
         }
         handler.removeCallbacks(updateSeekBar);
+
+        if (soundPool != null) {
+            soundPool.release();
+            soundPool = null;
+        }
     }
 }
