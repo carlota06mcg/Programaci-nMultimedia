@@ -18,10 +18,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="83dp"
+            android:layout_marginBottom="15dp"
             android:backgroundTint="#F8B2E5"
             android:text="Sonido 2"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="484dp" />
+            app:layout_constraintBottom_toTopOf="@+id/bcancion4"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -39,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Reproductor de Música <3"
+            android:text="Reproductor de Música"
             android:textSize="34sp"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="16dp" />
@@ -49,44 +50,54 @@
             android:layout_width="197dp"
             android:layout_height="181dp"
             android:layout_marginStart="107dp"
+            android:layout_marginTop="42dp"
             android:layout_marginEnd="107dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="106dp"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/tituloCancion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="176dp"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="178dp"
             android:text="TextView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            tools:layout_editor_absoluteX="175dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <Button
             android:id="@+id/bPausa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="107dp"
+            android:layout_marginTop="22dp"
             android:layout_marginEnd="21dp"
+            android:layout_marginBottom="72dp"
             android:backgroundTint="#FFB7EC"
             android:text="Pausa"
             android:textColorLink="#FFA9A9"
+            app:layout_constraintBottom_toTopOf="@+id/bcancion1"
             app:layout_constraintEnd_toStartOf="@+id/bPlay"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="364dp" />
+            app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
         <Button
             android:id="@+id/bPlay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
             android:layout_marginEnd="107dp"
+            android:layout_marginBottom="72dp"
             android:backgroundTint="#FFB6EC"
             android:text="Play"
+            app:layout_constraintBottom_toTopOf="@+id/bcancion2"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="364dp" />
+            app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
         <SeekBar
             android:id="@+id/seekBar"
@@ -118,10 +129,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="68dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginBottom="15dp"
             android:backgroundTint="#F8B2E5"
             android:text="Sonido 1"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="484dp" />
+            app:layout_constraintBottom_toTopOf="@+id/bcancion3"
+            app:layout_constraintEnd_toStartOf="@+id/bcancion2"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/bcancion3"
@@ -129,20 +143,24 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="63dp"
             android:layout_marginEnd="41dp"
+            android:layout_marginBottom="136dp"
             android:backgroundTint="#F8B2E5"
             android:text="Sonido 3"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/bcancion4"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="547dp" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/bcancion4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="49dp"
             android:layout_marginEnd="83dp"
+            android:layout_marginBottom="136dp"
             android:backgroundTint="#F8B2E5"
             android:text="Sonido 4"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="547dp" />
+            app:layout_constraintStart_toEndOf="@+id/bcancion3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,6 +35,18 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.guy);
+
+        Button btnPlay = findViewById(R.id.bPlay);
+        Button btnPause = findViewById(R.id.bPausa);
+        btnPlay.setOnClickListener(v -> {
+            mediaPlayer.start();
+        });
+
+        btnPause.setOnClickListener(v -> {
+            mediaPlayer.pause();
+        });
+
 
     }
 }
