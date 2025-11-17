@@ -35,18 +35,94 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.guy);
+        // Inicializar MediaPlayer
+        mediaPlayer = MediaPlayer.create(this, R.raw.guy);
 
-        Button btnPlay = findViewById(R.id.bPlay);
-        Button btnPause = findViewById(R.id.bPausa);
-        btnPlay.setOnClickListener(v -> {
-            mediaPlayer.start();
+        // Inicializar vistas
+        bPlay = findViewById(R.id.bPlay);
+        bPausa = findViewById(R.id.bPausa);
+        seekBar = findViewById(R.id.seekBar);
+        tReproduccion = findViewById(R.id.tReproduccion);
+        tTotal = findViewById(R.id.tTotal);
+        tituloCancion = findViewById(R.id.tituloCancion);
+        imageView = findViewById(R.id.imageView);
+
+        // Configurar duración total
+        int duracionTotal = mediaPlayer.getDuration();
+        seekBar.setMax(duracionTotal);
+        tTotal.setText(formatearTiempo(duracionTotal));
+        tReproduccion.setText("00:00");
+
+        // Botón Play
+        bPlay.setOnClickListener(v -> {
+            if (!mediaPlayer.isPlaying()) {
+                mediaPlayer.start();
+                actualizarSeekBar();
+            }
         });
 
-        btnPause.setOnClickListener(v -> {
-            mediaPlayer.pause();
+        // Botón Pausa
+        bPausa.setOnClickListener(v -> {
+            if (mediaPlayer.isPlaying()) {
+                mediaPlayer.pause();
+            }
         });
 
+        // Configurar SeekBar para que el usuario pueda moverla
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    mediaPlayer.seekTo(progress);
+                    tReproduccion.setText(formatearTiempo(progress));
+                }
+            }
 
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+        // Reiniciar cuando termine la canción
+        mediaPlayer.setOnCompletionListener(mp -> {
+            seekBar.setProgress(0);
+            tReproduccion.setText("00:00");
+        });
+    }
+
+    private void actualizarSeekBar() {
+        updateSeekBar = new Runnable() {
+            @Override
+            public void run() {
+                if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                    int posicionActual = mediaPlayer.getCurrentPosition();
+                    seekBar.setProgress(posicionActual);
+                    tReproduccion.setText(formatearTiempo(posicionActual));
+                    handler.postDelayed(this, 100); // Actualizar cada 100ms
+                }
+            }
+        };
+        handler.post(updateSeekBar);
+    }
+
+    private String formatearTiempo(int milisegundos) {
+        int segundos = (milisegundos / 1000) % 60;
+        int minutos = (milisegundos / (1000 * 60)) % 60;
+        return String.format("%02d:%02d", minutos, segundos);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Liberar recursos
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+        handler.removeCallbacks(updateSeekBar);
     }
 }
