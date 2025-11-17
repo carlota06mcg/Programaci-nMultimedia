@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.segundapantalla"
+    namespace = "com.example.pantalladelogin"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.segundapantalla"
+        applicationId = "com.example.pantalladelogin"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
