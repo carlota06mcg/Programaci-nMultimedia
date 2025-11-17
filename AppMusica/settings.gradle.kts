@@ -19,8 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TareaBotones"
-include(":app")
-include(":app")
+rootProject.name = "AppMusica"
 include(":app")
  
