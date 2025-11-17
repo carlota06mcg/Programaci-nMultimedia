@@ -35,10 +35,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Inicializar MediaPlayer
         mediaPlayer = MediaPlayer.create(this, R.raw.guy);
 
-        // Inicializar vistas
         bPlay = findViewById(R.id.bPlay);
         bPausa = findViewById(R.id.bPausa);
         seekBar = findViewById(R.id.seekBar);
@@ -47,13 +45,11 @@ public class MainActivity extends AppCompatActivity {
         tituloCancion = findViewById(R.id.tituloCancion);
         imageView = findViewById(R.id.imageView);
 
-        // Configurar duración total
         int duracionTotal = mediaPlayer.getDuration();
         seekBar.setMax(duracionTotal);
         tTotal.setText(formatearTiempo(duracionTotal));
         tReproduccion.setText("00:00");
 
-        // Botón Play
         bPlay.setOnClickListener(v -> {
             if (!mediaPlayer.isPlaying()) {
                 mediaPlayer.start();
@@ -61,14 +57,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Botón Pausa
         bPausa.setOnClickListener(v -> {
             if (mediaPlayer.isPlaying()) {
                 mediaPlayer.pause();
             }
         });
 
-        // Configurar SeekBar para que el usuario pueda moverla
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -87,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Reiniciar cuando termine la canción
         mediaPlayer.setOnCompletionListener(mp -> {
             seekBar.setProgress(0);
             tReproduccion.setText("00:00");
